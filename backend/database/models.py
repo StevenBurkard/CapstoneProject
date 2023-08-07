@@ -30,4 +30,7 @@ class Car(db.Model):
     # Establishes object relation between car-user so we can grab values like car.user.username
     user = db.relationship("User")
 
-# TODO: Add your models below, remember to add a new migration and upgrade database
+class Favorite(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    school = db.Column(db.String(255))
+    user = db.relationship("User")
