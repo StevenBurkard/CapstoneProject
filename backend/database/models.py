@@ -10,6 +10,7 @@ class User(db.Model):
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    account_balance = db.Column(db.Float, nullable=True)
 
     def hash_password(self):
         self.password = generate_password_hash(self.password).decode('utf8')
@@ -30,7 +31,16 @@ class Car(db.Model):
     # Establishes object relation between car-user so we can grab values like car.user.username
     user = db.relationship("User")
 
-class Favorite(db.Model):
+class FavoriteTeam(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     school = db.Column(db.String(255))
+    user = db.relationship("User")
+
+class Bet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    school = db.Column(db.String(255))
+    unit_amount = db.Column(db.Float, nullable=False)
+    did_user_win = db.Column(db.Boolean, nullable=False)
     user = db.relationship("User")
