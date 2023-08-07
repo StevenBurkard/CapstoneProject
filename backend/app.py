@@ -8,7 +8,7 @@ from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
-from resources.favorite_team import AllFavoriteTeamResource, UserFavoriteTeamResource
+from resources.favorite_teams import AllFavoriteTeamResource, UserFavoriteTeamResource
 from dotenv import load_dotenv
 from os import environ
 
