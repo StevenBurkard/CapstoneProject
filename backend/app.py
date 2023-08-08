@@ -9,6 +9,7 @@ from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
 from resources.favorite_teams import AllFavoriteTeamResource, UserFavoriteTeamResource
+from resources.bets import UserBetResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -59,5 +60,6 @@ def create_routes():
     # TODO: Create files for your Resources in resources folder, add them here
     api.add_resource(AllFavoriteTeamResource, '/api/favorite_teams')
     api.add_resource(UserFavoriteTeamResource, '/api/user_favorite_teams')
+    api.add_resource(UserBetResource, '/api/user_bets')
 
     return api

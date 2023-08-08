@@ -81,7 +81,7 @@ class BetSchema(ma.Schema):
     user_id = fields.Integer(required=False)
     school = fields.String(required=True)
     unit_amount = fields.Float(required=True)
-    did_user_win = fields.Boolean()
+    did_user_win = fields.Boolean(required=False)
     user = ma.Nested(UserSchema, many=False)
 
     class Meta:
