@@ -20,3 +20,34 @@ class UserBetResource(Resource):
         db.session.add(new_bet)
         db.session.commit()
         return bet_schema.dump(new_bet), 201
+
+class BetResource(Resource):
+    @jwt_required()
+    def put(self, bet_id):
+        user_id = get_jwt_identity()
+        bet = Bet.query.filter_by(id=bet_id, user_id=user_id).first()
+
+        if bet is None:
+            return {"message": "No bet was found"}, 404
+        
+        form_data = request.get_json()
+        if 'did_user_win' in form_data:
+            bet.did_user_win = form_data['did_user_win']
+        
+        if 'unit_amount' in form_data:
+            bet.unit_amount = form_data['unit_amount']
+        
+        db.session.commit()
+        return bet_schema.dump(bet), 200
+
+    @jwt_required()
+    def delete(self, bet_id):
+        user_id = get_jwt_identity()
+        bet = Bet.query.filter_by(id=bet_id, user_id=user_id).first()
+
+        if bet is None:
+            return {"message": "No bet was found"}, 404
+        
+        db.session.delete(bet)
+        db.session.commit()
+        return {"message": "Bet successfully deleted!"}, 204

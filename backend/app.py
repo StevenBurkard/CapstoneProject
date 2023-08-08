@@ -9,7 +9,7 @@ from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
 from resources.favorite_teams import AllFavoriteTeamResource, UserFavoriteTeamResource
-from resources.bets import UserBetResource
+from resources.bets import UserBetResource, BetResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -61,5 +61,7 @@ def create_routes():
     api.add_resource(AllFavoriteTeamResource, '/api/favorite_teams')
     api.add_resource(UserFavoriteTeamResource, '/api/user_favorite_teams')
     api.add_resource(UserBetResource, '/api/user_bets')
+    api.add_resource(BetResource, '/api/bets/<int:bet_id>')
 
+    
     return api
