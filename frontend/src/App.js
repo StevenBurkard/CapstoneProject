@@ -6,6 +6,7 @@ import "./App.css";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import MatchupsPage from "./pages/MatchupsPage/MatchupsPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -29,6 +30,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/matchups" element={<MatchupsPage />} />
       </Routes>
       <Footer />
     </div>
