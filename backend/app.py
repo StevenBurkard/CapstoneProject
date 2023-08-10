@@ -10,6 +10,7 @@ from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
 from resources.favorite_teams import AllFavoriteTeamResource, UserFavoriteTeamResource
 from resources.bets import UserBetResource, BetResource
+from resources.college_football_data import TestResource, MatchupResource, BetLineResource, TeamStatResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -32,6 +33,7 @@ def create_app():
     # Loads config properties from .env file
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
+    app.config['CFD_API_KEY'] = environ.get('CFD_API_KEY')
 
     # Registers all routes with API
     api = create_routes()
@@ -62,6 +64,9 @@ def create_routes():
     api.add_resource(UserFavoriteTeamResource, '/api/user_favorite_teams')
     api.add_resource(UserBetResource, '/api/user_bets')
     api.add_resource(BetResource, '/api/bets/<int:bet_id>')
-
+    api.add_resource(TestResource, '/api/test_resource')
+    api.add_resource(MatchupResource, '/api/matchup_resource')
+    api.add_resource(BetLineResource, '/api/betLine_resource')
+    api.add_resource(TeamStatResource, '/api/roster')
     
     return api
