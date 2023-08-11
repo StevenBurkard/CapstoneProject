@@ -34,7 +34,8 @@ class MatchupResource(Resource):
         try:
             response = api_instance.get_games(year, week=week, division=division)
             serialized_data = [{
-                "matchup": f"{game.away_team} vs  {game.home_team}",
+                "away_team": game.away_team,
+                "home_team": game.home_team,
                 "venue": game.venue,
                 "start_date": game.start_date,
                 "game_id": game.id,

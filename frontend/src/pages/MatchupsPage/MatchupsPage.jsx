@@ -12,9 +12,9 @@ const MatchupsPage = () => {
 
     const getMatchups = async () => {
         try {
-            let response = await axios.get('https://api.collegefootballdata.com/lines?year=2023&week=1', {
+            let response = await axios.get('http://127.0.0.1:5000/api/matchup_resource', {
                 headers: {
-                    Authorization: "Bearer RtZc2irnPx84o8vvyPpYJjWIYDhbV3QDCEu6aqNxyJU89ndNYv5jy0A3q8HDkVon" 
+                    Authorization: "Bearer wvraN694z^0173k^ua46zin2tp1nwklw938xlhao" 
                 }
             });
                 
@@ -26,10 +26,15 @@ const MatchupsPage = () => {
 
     return ( 
         <div className='container'>
-            <h1>Week 1 Matchups</h1>
+            <h1>This Weeks Matchups</h1>
             {matchups.map((matchup) => (
-                <div key={matchup.id}>
-                    <p>{matchup.homeTeam} vs. {matchup.awayTeam}</p>
+                <div key={matchup.game_id}>
+                    <div>
+                        <p>Week: {matchup.week}</p>
+                        <p>{matchup.away_team} vs. {matchup.home_team}</p>
+                        <p>{matchup.venue}</p>
+                        <p>Start Time: {matchup.start_date}</p>
+                    </div>
                 </div>
             ))}
         </div>
