@@ -97,3 +97,22 @@ class TeamStatResource(Resource):
             return jsonify(serialized_data)
         except ApiException as e:
             print("Exception when calling BettingApi->get_roster: %s\n" % e)
+
+class RosterResource(Resource):
+    def get(self):
+        configuration = cfbd.Configuration()
+        configuration.api_key['Authorization'] = 'RtZc2irnPx84o8vvyPpYJjWIYDhbV3QDCEu6aqNxyJU89ndNYv5jy0A3q8HDkVon'
+        configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+        api_instance = cfbd.TeamsApi(cfbd.ApiClient(configuration))
+
+        team = "wisconsin"
+        year = 2023
+
+        try:
+            response = api_instance.get_roster(team=team, year=year)
+            serialized_data = [player.to_dict() for player in response]
+
+            return jsonify(serialized_data)
+        except ApiException as e:
+            print("Exception when calling BettingApi->get_roster: %s\n" % e)

@@ -10,7 +10,7 @@ from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
 from resources.favorite_teams import AllFavoriteTeamResource, UserFavoriteTeamResource
 from resources.bets import UserBetResource, BetResource
-from resources.college_football_data import TestResource, MatchupResource, BetLineResource, TeamStatResource
+from resources.college_football_data import TestResource, MatchupResource, BetLineResource, TeamStatResource, RosterResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -67,6 +67,7 @@ def create_routes():
     api.add_resource(TestResource, '/api/test_resource')
     api.add_resource(MatchupResource, '/api/matchup_resource')
     api.add_resource(BetLineResource, '/api/betLine_resource')
-    api.add_resource(TeamStatResource, '/api/roster')
+    api.add_resource(TeamStatResource, '/api/team_stats')
+    api.add_resource(RosterResource, '/api/roster')
     
     return api
