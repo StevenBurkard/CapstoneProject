@@ -66,8 +66,8 @@ def create_routes():
     api.add_resource(BetResource, '/api/bets/<int:bet_id>')
     api.add_resource(TestResource, '/api/test_resource')
     api.add_resource(MatchupResource, '/api/matchup_resource')
-    api.add_resource(BetLineResource, '/api/betLine_resource')
-    api.add_resource(TeamStatResource, '/api/team_stats')
-    api.add_resource(RosterResource, '/api/roster')
+    api.add_resource(BetLineResource, '/api/betLine_resource/<int:game_id>')
+    api.add_resource(TeamStatResource, '/api/team_stats/<string:school>')
+    api.add_resource(RosterResource, '/api/roster/<string:school>')
     
     return api

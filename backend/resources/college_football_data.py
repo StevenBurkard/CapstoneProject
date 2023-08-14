@@ -2,12 +2,13 @@ from flask import jsonify
 from flask_restful import Resource
 import cfbd
 from cfbd.rest import ApiException
+from os import environ
 
 class TestResource(Resource):
     def get(self):
         # Test resource connected to endpoint '/api/test_resource'
         configuration = cfbd.Configuration()
-        configuration.api_key['Authorization'] = 'RtZc2irnPx84o8vvyPpYJjWIYDhbV3QDCEu6aqNxyJU89ndNYv5jy0A3q8HDkVon'
+        configuration.api_key['Authorization'] = environ.get('CFD_API_KEY')
         configuration.api_key_prefix['Authorization'] = 'Bearer'
 
         api_instance = cfbd.TeamsApi(cfbd.ApiClient(configuration))
@@ -23,7 +24,7 @@ class TestResource(Resource):
 class MatchupResource(Resource):
     def get(self):
         configuration = cfbd.Configuration()
-        configuration.api_key['Authorization'] = 'RtZc2irnPx84o8vvyPpYJjWIYDhbV3QDCEu6aqNxyJU89ndNYv5jy0A3q8HDkVon'
+        configuration.api_key['Authorization'] = environ.get('CFD_API_KEY')
         configuration.api_key_prefix['Authorization'] = 'Bearer'
 
         api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
@@ -47,9 +48,9 @@ class MatchupResource(Resource):
             print("Exception when calling BettingApi->get_games: %s\n" % e)
 
 class BetLineResource(Resource):
-    def get(self):
+    def get(self, game_id):
         configuration = cfbd.Configuration()
-        configuration.api_key['Authorization'] = 'RtZc2irnPx84o8vvyPpYJjWIYDhbV3QDCEu6aqNxyJU89ndNYv5jy0A3q8HDkVon'
+        configuration.api_key['Authorization'] = environ.get('CFD_API_KEY')
         configuration.api_key_prefix['Authorization'] = 'Bearer'
 
         api_instance = cfbd.BettingApi(cfbd.ApiClient(configuration))
@@ -57,7 +58,7 @@ class BetLineResource(Resource):
         week = 1
 
         try:
-            response = api_instance.get_lines(year=year, week=week)
+            response = api_instance.get_lines(year=year, week=week, game_id=game_id)
             serialized_data = []
             for game in response:
                 game_data = {
@@ -67,12 +68,14 @@ class BetLineResource(Resource):
                     "bet_lines": []
                 }
 
-                for line in game.lines:
-                    game_data['bet_lines'].append({
-                        "provider": line.provider,
-                        "spread": line.spread,
-                        "over_under": line.over_under
-                    })
+                if hasattr(game, 'lines') and isinstance(game.lines, list):
+                    for line in game.lines:
+                        if all(hasattr(line, attr) for attr in ['provider', 'spread', 'over_under']):
+                            game_data['bet_lines'].append({
+                                "provider": line.provider,
+                                "spread": line.spread,
+                                "over_under": line.over_under
+                            })
 
                 serialized_data.append(game_data)
             return jsonify(serialized_data)
@@ -80,38 +83,38 @@ class BetLineResource(Resource):
             print("Exception when calling BettingApi->get_lines: %s\n" % e)
 
 class TeamStatResource(Resource):
-    def get(self):
+    def get(self, school):
         configuration = cfbd.Configuration()
-        configuration.api_key['Authorization'] = 'RtZc2irnPx84o8vvyPpYJjWIYDhbV3QDCEu6aqNxyJU89ndNYv5jy0A3q8HDkVon'
+        configuration.api_key['Authorization'] = environ.get('CFD_API_KEY')
         configuration.api_key_prefix['Authorization'] = 'Bearer'
 
         api_instance = cfbd.StatsApi(cfbd.ApiClient(configuration))
         
-        team = "wisconsin"
+        #team = "wisconsin"
         year = 2022
         
 
         try:
-            response = api_instance.get_team_season_stats(team=team, year=year)
+            response = api_instance.get_team_season_stats(team=school, year=year)
             serialized_data = [stat.to_dict() for stat in response]
 
             return jsonify(serialized_data)
         except ApiException as e:
-            print("Exception when calling BettingApi->get_roster: %s\n" % e)
+            print("Exception when calling BettingApi->get_team_stats: %s\n" % e)
 
 class RosterResource(Resource):
-    def get(self):
+    def get(self, school):
         configuration = cfbd.Configuration()
-        configuration.api_key['Authorization'] = 'RtZc2irnPx84o8vvyPpYJjWIYDhbV3QDCEu6aqNxyJU89ndNYv5jy0A3q8HDkVon'
+        configuration.api_key['Authorization'] = environ.get('CFD_API_KEY')
         configuration.api_key_prefix['Authorization'] = 'Bearer'
 
         api_instance = cfbd.TeamsApi(cfbd.ApiClient(configuration))
 
-        team = "wisconsin"
+       # team = "wisconsin"
         year = 2023
 
         try:
-            response = api_instance.get_roster(team=team, year=year)
+            response = api_instance.get_roster(team=school, year=year)
             serialized_data = [player.to_dict() for player in response]
 
             return jsonify(serialized_data)

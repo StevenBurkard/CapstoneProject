@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import './MatchupsPage.css';
 
 const MatchupsPage = () => {
     const [matchups, setMatchups] = useState([]);
@@ -26,16 +27,18 @@ const MatchupsPage = () => {
 
     return ( 
         <div className='container'>
-            <h1>This Weeks Matchups</h1>
+            <h2>This Weeks Matchups(Away vs Home)</h2>
             {matchups.map((matchup) => (
-                <div key={matchup.game_id}>
+                <Link to={`/game/${matchup.game_id}`} state={{"home_team": matchup.home_team, "away_team": matchup.away_team, "game_id": matchup.game_id}} key={matchup.game_id}>
                     <div>
-                        <p>Week: {matchup.week}</p>
-                        <p>{matchup.away_team} vs. {matchup.home_team}</p>
-                        <p>{matchup.venue}</p>
-                        <p>Start Time: {matchup.start_date}</p>
+                        <div className='matchup'>
+                            <p>Week: {matchup.week}</p>
+                            <p>{matchup.away_team} vs. {matchup.home_team}</p>
+                            <p>{matchup.venue}</p>
+                            <p>Start Time: {matchup.start_date}</p>
+                        </div>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
      );
