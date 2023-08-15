@@ -67,7 +67,7 @@ const MatchupsPage = () => {
         <div className='container'>
             <h2>This Weeks Matchups(Away vs Home)</h2>
             {sortedMatchups.map((matchup) => (
-                <Link to={`/game/${matchup.game_id}`} state={{"home_team": matchup.home_team, "away_team": matchup.away_team, "game_id": matchup.game_id}} key={matchup.game_id}>
+                <Link to={`/game/${matchup.game_id}`} state={{"home_team": matchup.home_team, "away_team": matchup.away_team, "game_id": matchup.game_id, "start_date": matchup.start_date}} key={matchup.game_id} style={{textDecoration: "none"}}>
                     <div>
                         <div className='matchup'>
                             <p>Week: {matchup.week}</p>

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const GameDetails = () => {
     const location = useLocation();
     const gameId = location.state.game_id;
-
+    const startDate = location.state.start_date;
+    /*Checking to see if home and away team is being passed to GameDetails*/
     const homeTeam = location?.state?.home_team || "Home Team";
     const awayTeam = location?.state?.away_team || "Away Team";
 
@@ -84,10 +85,15 @@ const GameDetails = () => {
                             <p>Over/Under: {line.over_under}</p>
                         </div>
                     ))}
+                    <div>
+                        <Link to={"/user_bets"} state={{"gameId": gameId, "startDate": startDate, "homeTeam": homeTeam, "awayTeam": awayTeam}} key={gameId}>
+                        <button>Place Bet</button>
+                        </Link>
+                    </div>
                 </div>
             )}
             <div>
-                <h3>{awayTeam} Team Statistics:</h3>
+                <h2>{awayTeam} Football Team</h2>
                 <table>
                     <thead>
                         <tr>
@@ -131,7 +137,7 @@ const GameDetails = () => {
             </div>
 
             <div>
-                <h3>{homeTeam} Team Statistics:</h3>
+                <h2>{homeTeam} Football Team</h2>
                 <table>
                     <thead>
                         <tr>

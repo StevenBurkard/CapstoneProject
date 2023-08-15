@@ -15,6 +15,7 @@ import MatchupsPage from "./pages/MatchupsPage/MatchupsPage";
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import GameDetails from "./components/GameDetails/GameDetails";
+import BetForm from "./components/BetForm/BetForm";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -37,6 +38,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/matchups" element={<MatchupsPage />} />
         <Route path="/game/:gameId" element={<GameDetails />} />
+        <Route path="/user_bets" element={<BetForm />} />
       </Routes>
       <Footer />
     </div>
