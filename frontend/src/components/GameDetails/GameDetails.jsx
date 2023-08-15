@@ -68,7 +68,7 @@ const GameDetails = () => {
             console.log('Error in getHomeTeamRoster', error)
         }
     };
-    console.log(`Game ID: ${gameId}`);
+
     return ( 
         <div className='container'>
             <h1>{awayTeam} vs {homeTeam}</h1>
@@ -88,41 +88,90 @@ const GameDetails = () => {
             )}
             <div>
                 <h3>{awayTeam} Team Statistics:</h3>
-                {awayTeamStats.map((stat, index) => (
-                    <div key={index}>
-                        <p>{stat.stat_name}: {stat.stat_value}</p>
-                    </div>
-                ))}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Statistic</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {awayTeamStats.map((stat, index) => (
+                            <tr key={index}>
+                                <td>{stat.stat_name}</td>
+                                <td>{stat.stat_value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
-            <div>
-                <h3>{homeTeam} Team Statistics:</h3>
-                {homeTeamStats.map((stat, index) => (
-                    <div key={index}>
-                        <p>{stat.stat_name}: {stat.stat_value}</p>
-                    </div>
-                ))}
-            </div>
+
             <div>
                 <h2>{awayTeam} Team Roster:</h2>
-                {awayTeamRoster.map((player, index) => (
-                    <div key={index}>
-                        <h3>{player.first_name} {player.last_name}</h3>
-                        <p>Postition: {player.position}</p>
-                        <p>Jersey Number: {player.jersey}</p>
-                        <p>Home Town: {player.home_city}, {player.home_state}</p>
-                    </div>
-                ))}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Home Town</th>
+                            <th>Jersey Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {awayTeamRoster.map((player, index) => (
+                            <tr key={index}>
+                                <td>{player.first_name} {player.last_name}</td>
+                                <td>{player.position}</td>
+                                <td>{player.home_city}, {player.home_state}</td>
+                                <td>{player.jersey}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
+
+            <div>
+                <h3>{homeTeam} Team Statistics:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Statistic</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {homeTeamStats.map((stat, index) => (
+                            <tr key={index}>
+                                <td>{stat.stat_name}</td>
+                                <td>{stat.stat_value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
             <div>
                 <h2>{homeTeam} Team Roster:</h2>
-                {homeTeamRoster.map((player, index) => (
-                    <div key={index}>
-                        <h3>{player.first_name} {player.last_name}:</h3>
-                        <p>Postition: {player.position}</p>
-                        <p>Jersey Number: {player.jersey}</p>
-                        <p>Home Town: {player.home_city}, {player.home_state}</p>
-                    </div>
-                ))}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Home Town</th>
+                            <th>Jersey Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {homeTeamRoster.map((player, index) => (
+                            <tr key={index}>
+                                <td>{player.first_name} {player.last_name}</td>
+                                <td>{player.position}</td>
+                                <td>{player.home_city}, {player.home_state}</td>
+                                <td>{player.jersey}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
 
         

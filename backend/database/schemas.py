@@ -82,10 +82,11 @@ class BetSchema(ma.Schema):
     school = fields.String(required=True)
     unit_amount = fields.Float(required=True)
     did_user_win = fields.Boolean(required=False)
+    bet_date = fields.String(required=True)
     user = ma.Nested(UserSchema, many=False)
 
     class Meta:
-        fields = ("id", "user_id", "school", "unit_amount", "did_user_win", "user")
+        fields = ("id", "user_id", "school", "unit_amount", "did_user_win", "bet_date", "user")
     
     @post_load
     def create_bet(self, data, **kwargs):

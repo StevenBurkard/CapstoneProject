@@ -43,4 +43,5 @@ class Bet(db.Model):
     school = db.Column(db.String(255))
     unit_amount = db.Column(db.Float, nullable=False)
     did_user_win = db.Column(db.Boolean, nullable=True)
+    bet_date = db.Column(db.String(255), nullable=True)
     user = db.relationship("User")
