@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 
 const GameDetails = () => {
     const location = useLocation();
@@ -94,98 +102,105 @@ const GameDetails = () => {
             )}
             <div>
                 <h2>{awayTeam} Football Team</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Statistic</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {awayTeamStats.map((stat, index) => (
-                            <tr key={index}>
-                                <td>{stat.stat_name}</td>
-                                <td>{stat.stat_value}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <TableContainer component={Paper}>
+                    <Table sx={{ maxWidth: '90%' }}  aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Statistic</TableCell>
+                                <TableCell align="right" style={{fontWeight: 'bolder', fontSize: '1em'}}>Value</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {awayTeamStats.map((stat, index) => (
+                                <TableRow key={index}>
+                                    <TableCell component="th" scope="row">
+                                        {stat.stat_name}
+                                    </TableCell>
+                                    <TableCell align="right">{stat.stat_value}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
 
             <div>
-                <h2>{awayTeam} Team Roster:</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Home Town</th>
-                            <th>Jersey Number</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <h2>{awayTeam} Team Roster:</h2>
+            <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Name</TableCell>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Position</TableCell>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Home Town</TableCell>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Jersey Number</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {awayTeamRoster.map((player, index) => (
-                            <tr key={index}>
-                                <td>{player.first_name} {player.last_name}</td>
-                                <td>{player.position}</td>
-                                <td>{player.home_city}, {player.home_state}</td>
-                                <td>{player.jersey}</td>
-                            </tr>
+                            <TableRow key={index}>
+                                <TableCell>{player.first_name} {player.last_name}</TableCell>
+                                <TableCell>{player.position}</TableCell>
+                                <TableCell>{player.home_city}, {player.home_state}</TableCell>
+                                <TableCell>{player.jersey}</TableCell>
+                            </TableRow>
                         ))}
-                    </tbody>
-                </table>
-            </div>
-
-            <div>
-                <h2>{homeTeam} Football Team</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Statistic</th>
-                            <th>Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {homeTeamStats.map((stat, index) => (
-                            <tr key={index}>
-                                <td>{stat.stat_name}</td>
-                                <td>{stat.stat_value}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-            <div>
-                <h2>{homeTeam} Team Roster:</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Home Town</th>
-                            <th>Jersey Number</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {homeTeamRoster.map((player, index) => (
-                            <tr key={index}>
-                                <td>{player.first_name} {player.last_name}</td>
-                                <td>{player.position}</td>
-                                <td>{player.home_city}, {player.home_state}</td>
-                                <td>{player.jersey}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
-        
-
-        
-
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
+
+        <div>
+            <h2>{homeTeam} Football Team</h2>
+            <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Statistic</TableCell>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Value</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {homeTeamStats.map((stat, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{stat.stat_name}</TableCell>
+                                <TableCell>{stat.stat_value}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
+
+        <div>
+            <h2>{homeTeam} Team Roster:</h2>
+            <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Name</TableCell>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Position</TableCell>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Home Town</TableCell>
+                            <TableCell style={{fontWeight: 'bolder', fontSize: '1em'}}>Jersey Number</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {homeTeamRoster.map((player, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{player.first_name} {player.last_name}</TableCell>
+                                <TableCell>{player.position}</TableCell>
+                                <TableCell>{player.home_city}, {player.home_state}</TableCell>
+                                <TableCell>{player.jersey}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
+    </div>
+
      );
 }
  
 export default GameDetails;
+

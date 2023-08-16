@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+
 ul {
   display: flex;
   justify-content: space-between;
@@ -9,7 +12,7 @@ li {
 }
 
 .navBar {
-  background: steelblue;
+  background: #44318D;
   box-shadow: 4px 2px 5px gray;
   color: white;
   margin-bottom: 2rem;

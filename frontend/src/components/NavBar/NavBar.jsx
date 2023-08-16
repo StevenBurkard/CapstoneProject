@@ -11,7 +11,7 @@ const Navbar = () => {
     <div className="navBar">
       <ul>
         <li className="brand">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "white", fontFamily: "'Lobster', cursive" }}>
             <b>GoalLine Gamblers</b>
           </Link>
         </li>

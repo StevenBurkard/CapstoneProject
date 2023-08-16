@@ -40,7 +40,6 @@ function App() {
         <Route path="/game/:gameId" element={<GameDetails />} />
         <Route path="/user_bets" element={<BetForm />} />
       </Routes>
-      <Footer />
     </div>
   );
 }
