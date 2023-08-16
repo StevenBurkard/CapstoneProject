@@ -12,7 +12,8 @@ const BetForm = () => {
     const awayTeam = location.state.awayTeam;
 
     const [team, setTeam] = useState("");
-    const [unitAmount, setUnitAmount] = useState(0)
+    const [unitAmount, setUnitAmount] = useState(0);
+    const [message, setMessage] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,8 +30,10 @@ const BetForm = () => {
                 }
             });
             console.log('Bet successfully submitted!', response.data);
+            setMessage("Bet was successfully submitted!");
         } catch (error) {
             console.log('Error submitting bet', error);
+            setMessage("Error submitting bet..");
         }
     }
 console.log(homeTeam);
@@ -58,6 +61,7 @@ console.log(homeTeam);
                 </div>
                 <button type='submit'>Place Bet</button>
             </form>
+            <p>{message}</p>
         </div>
       );
 }
