@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
+import moment from 'moment';
 import './MatchupsPage.css';
 
 const MatchupsPage = () => {
@@ -79,7 +80,7 @@ const MatchupsPage = () => {
                                 {!isFavorite(matchup.home_team) && <button onClick={(e) => {e.preventDefault(); postUserFavorite(matchup.home_team)}}>Favorite</button>}
                             </p>
                             <p>{matchup.venue}</p>
-                            <p>Start Time: {matchup.start_date}</p>
+                            <p>Start Time: {moment(matchup.start_date).format("YYYY-MM-DD")}</p>
                         </div>
                     </div>
                 </Link>
