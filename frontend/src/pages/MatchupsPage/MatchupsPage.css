@@ -20,3 +20,9 @@
     cursor: pointer;
     color: red;
 }
+
+.matchup button:hover{
+    background: #44318D;
+    color: white;
+    cursor: pointer;
+}
