@@ -18,7 +18,7 @@ const MatchupsPage = () => {
 
     const getMatchups = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:5000/api/matchup_resource');
+            let response = await axios.get('http://3.17.79.83:8000/api/matchup_resource');
                 
             setMatchups(response.data);
         }catch (error){
@@ -29,7 +29,7 @@ const MatchupsPage = () => {
     
     const getUserFavoriteTeams = async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:5000/api/user_favorite_teams', {
+            let response = await axios.get('http://3.17.79.83:8000/api/user_favorite_teams', {
                 headers: {
                     Authorization: "Bearer " + token 
                 }
@@ -42,7 +42,7 @@ const MatchupsPage = () => {
 
     const postUserFavorite = async (team) => {
         try {
-            let response = await axios.post('http://127.0.0.1:5000/api/user_favorite_teams', { school: team },  {
+            let response = await axios.post('http://3.17.79.83:8000/api/user_favorite_teams', { school: team },  {
                 headers: {
                     Authorization: "Bearer " + token 
                 }

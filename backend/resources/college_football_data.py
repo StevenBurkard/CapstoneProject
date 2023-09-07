@@ -29,7 +29,7 @@ class MatchupResource(Resource):
 
         api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
         year = 2023
-        week = 1
+        week = 2
         division = 'fbs'
 
         try:
@@ -55,7 +55,7 @@ class BetLineResource(Resource):
 
         api_instance = cfbd.BettingApi(cfbd.ApiClient(configuration))
         year = 2023
-        week = 1
+        week = 2
 
         try:
             response = api_instance.get_lines(year=year, week=week, game_id=game_id)
@@ -91,7 +91,7 @@ class TeamStatResource(Resource):
         api_instance = cfbd.StatsApi(cfbd.ApiClient(configuration))
         
         #team = "wisconsin"
-        year = 2022
+        year = 2023
         
 
         try:

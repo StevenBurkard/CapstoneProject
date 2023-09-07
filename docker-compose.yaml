@@ -1,0 +1,34 @@
+version: '3.1'
+services:
+  goal-line-gamblers-database:
+    build: ./database
+    image: stevenburkard/goal-line-gamblers-database:1.0
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    restart: on-failure
+    volumes:
+      - db-data:/var/lib/mysql
+
+  goal-line-gamblers-backend:
+    build: ./backend
+    image: stevenburkard/goal-line-gamblers-backend:1.0
+    ports:
+      - 8000:8000
+    restart: on-failure
+    depends_on:
+      - "goal-line-gamblers-database"
+    command: >
+      sh -c "flask db upgrade && gunicorn -b 0.0.0.0 app:app"
+
+  goal-line-gamblers-frontend:
+    build: ./frontend
+    image: stevenburkard/goal-line-gamblers-frontend:1.0
+    ports:
+      - 80:80
+    depends_on:
+      - "goal-line-gamblers-backend"
+
+volumes:
+  db-data:
