@@ -71,3 +71,5 @@ def create_routes():
     api.add_resource(RosterResource, '/api/roster/<string:school>')
     
     return api
+
+app = create_app()
