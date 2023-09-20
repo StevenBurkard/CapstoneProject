@@ -34,7 +34,7 @@ const GameDetails = () => {
 
     const getBetLine = async () => {
         try {
-            let response = await axios.get(`http://3.17.79.83:8000/api/betLine_resource/${gameId}`);
+            let response = await axios.get(`http://127.0.0.1:5000/api/betLine_resource/${gameId}`);
 
             setBetLine(response.data);
         }catch (error){
@@ -43,7 +43,7 @@ const GameDetails = () => {
     };
     const getAwayTeamStats = async () => {
         try {
-            let response = await axios.get(`http://3.17.79.83:8000/api/team_stats/${awayTeam}`);
+            let response = await axios.get(`http://127.0.0.1:5000/api/team_stats/${awayTeam}`);
 
             setAwayTeamStats(response.data);
         }catch (error){
@@ -52,7 +52,7 @@ const GameDetails = () => {
     };
     const getHomeTeamStats = async () => {
         try {
-            let response = await axios.get(`http://3.17.79.83:8000/api/team_stats/${homeTeam}`);
+            let response = await axios.get(`http://127.0.0.1:5000/api/team_stats/${homeTeam}`);
 
             setHomeTeamStats(response.data);
         } catch (error) {
@@ -61,7 +61,7 @@ const GameDetails = () => {
     };
     const getAwayTeamRoster = async () => {
         try {
-            let response = await axios.get(`http://3.17.79.83:8000/api/roster/${awayTeam}`);
+            let response = await axios.get(`http://127.0.0.1:5000/api/roster/${awayTeam}`);
 
             setAwayTeamRoster(response.data);
         } catch (error) {
@@ -70,7 +70,7 @@ const GameDetails = () => {
     };
     const getHomeTeamRoster = async () => {
         try {
-            let response = await axios.get(`http://3.17.79.83:8000/api/roster/${homeTeam}`);
+            let response = await axios.get(`http://127.0.0.1:5000/api/roster/${homeTeam}`);
 
             setHomeTeamRoster(response.data);
         } catch (error) {

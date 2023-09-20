@@ -3,6 +3,18 @@ from flask_restful import Resource
 import cfbd
 from cfbd.rest import ApiException
 from os import environ
+from datetime import datetime, timedelta
+
+
+def current_week(start_date):
+    today = datetime.now()
+    delta = today - start_date
+    current_week = delta.days // 7 + 1
+
+    if today.weekday() == 0:
+        current_week += 1
+    
+    return current_week
 
 class TestResource(Resource):
     def get(self):
@@ -28,8 +40,10 @@ class MatchupResource(Resource):
         configuration.api_key_prefix['Authorization'] = 'Bearer'
 
         api_instance = cfbd.GamesApi(cfbd.ApiClient(configuration))
+
+        start_date = datetime(2023, 8, 26)
         year = 2023
-        week = 2
+        week = current_week(start_date)
         division = 'fbs'
 
         try:
@@ -54,8 +68,10 @@ class BetLineResource(Resource):
         configuration.api_key_prefix['Authorization'] = 'Bearer'
 
         api_instance = cfbd.BettingApi(cfbd.ApiClient(configuration))
+
+        start_date = datetime(2023, 8, 26)
         year = 2023
-        week = 2
+        week = current_week(start_date)
 
         try:
             response = api_instance.get_lines(year=year, week=week, game_id=game_id)
