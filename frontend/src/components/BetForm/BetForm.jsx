@@ -44,12 +44,11 @@ console.log(homeTeam);
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Team:</label>
-                    <input
-                        type='text'
-                        value={team}
-                        placeholder='A teams name'
-                        onChange={e => setTeam(e.target.value)}
-                    />
+                    <select value={team} onChange={e => setTeam(e.target.value)}>
+                       <option value="" disabled>Pick a Team</option>
+                       <option value={homeTeam}>{homeTeam}</option>
+                       <option value={awayTeam}>{awayTeam}</option>
+                    </select>
                 </div>
                 <div>
                     <label>Unit Amount:</label>
