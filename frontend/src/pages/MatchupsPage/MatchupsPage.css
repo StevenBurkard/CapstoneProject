@@ -18,7 +18,7 @@
     border-radius: 4px;
     border: 2px solid #44318D;
     cursor: pointer;
-    color: red;
+    color: #44318D;
 }
 
 .matchup button:hover{

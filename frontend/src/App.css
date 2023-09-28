@@ -19,8 +19,8 @@ p {
 
 button {
   background-color: transparent;
-  border: 2px solid steelblue;
-  color: steelblue;
+  border: 2px solid #44318D;
+  color: #44318D;
   font-size: 1rem;
   font-family: inherit;
   max-width: 100px;
@@ -30,7 +30,7 @@ button {
 button:hover {
   cursor: pointer;
   color: white;
-  background-color: steelblue;
+  background-color: #44318D;
 }
 
 .container {
