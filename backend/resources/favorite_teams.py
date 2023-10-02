@@ -27,3 +27,17 @@ class UserFavoriteTeamResource(Resource):
         db.session.add(new_favorite_team)
         db.session.commit()
         return favorite_team_schema.dump(new_favorite_team), 201
+    
+    #User DELETES a favorite team
+    @jwt_required()
+    def delete(self):
+        user_id = get_jwt_identity()
+        form_data = request.get_json()
+        school = form_data.get('school')
+        favorite_team = FavoriteTeam.query.filter_by(user_id=user_id, school=school).first()
+        if favorite_team:
+            db.session.delete(favorite_team)
+            db.session.commit()
+            return 'team successfully unfavorited!', 204
+        else:
+            return 'Favorite Team not found', 404
