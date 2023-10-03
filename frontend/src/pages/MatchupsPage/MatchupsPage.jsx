@@ -55,6 +55,22 @@ const MatchupsPage = () => {
             console.log('Error in postUserFavorite', error);
         }
     };
+
+    const deleteUserFavorite = async (team) => {
+        try {
+            let response = await axios.delete('http://127.0.0.1:5000/api/user_favorite_teams', {
+                headers: {
+                    Authorization: "Bearer " + token
+                },
+                data: { school: team }
+            });
+            if (response.status === 204) {
+                setFavoriteTeams(prevState => prevState.filter(fav => fav !== team));
+            }
+        } catch (error) {
+            console.log('Error in deleteUserFavorite', error)
+        }
+    }
     
     const isFavorite = (team) => favoriteTeams.includes(team);
 
@@ -74,10 +90,18 @@ const MatchupsPage = () => {
                             <p>Week: {matchup.week}</p>
                             <p>
                                 {matchup.away_team} 
-                                {!isFavorite(matchup.away_team) && <button onClick={(e) => {e.preventDefault(); postUserFavorite(matchup.away_team)}}>Favorite</button>}
+                                {!isFavorite(matchup.away_team) ? (
+                                    <button onClick={(e) => {e.preventDefault(); postUserFavorite(matchup.away_team)}}>Favorite</button>
+                                ) : (
+                                    <button onClick={(e) => {e.preventDefault(); deleteUserFavorite(matchup.away_team)}}>Unfavorite</button>
+                                )}
                                 vs. 
                                 {matchup.home_team}
-                                {!isFavorite(matchup.home_team) && <button onClick={(e) => {e.preventDefault(); postUserFavorite(matchup.home_team)}}>Favorite</button>}
+                                {!isFavorite(matchup.home_team) ? (
+                                    <button onClick={(e) => {e.preventDefault(); postUserFavorite(matchup.home_team)}}>Favorite</button>
+                                ) : (
+                                    <button onClick={(e) => {e.preventDefault(); deleteUserFavorite(matchup.home_team)}}>Unfavorite</button>
+                                )}
                             </p>
                             <p>{matchup.venue}</p>
                             <p>Start Time: {moment(matchup.start_date).format("YYYY-MM-DD")}</p>
