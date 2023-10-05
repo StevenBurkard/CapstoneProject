@@ -19,10 +19,12 @@
     border: 2px solid #44318D;
     cursor: pointer;
     color: #44318D;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 .matchup button:hover{
     background: #44318D;
     color: white;
     cursor: pointer;
+    box-shadow: 0px 4px 8px 2px gray;
 }
