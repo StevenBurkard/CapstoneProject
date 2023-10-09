@@ -104,7 +104,7 @@ const MatchupsPage = () => {
                                 )}
                             </p>
                             <p>{matchup.venue}</p>
-                            <p>Start Time: {moment(matchup.start_date).format("YYYY-MM-DD")}</p>
+                            <p>Game Date: {moment(matchup.start_date).format("YYYY-MM-DD")}</p>
                         </div>
                     </div>
                 </Link>
